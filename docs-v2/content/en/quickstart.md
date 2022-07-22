@@ -67,7 +67,7 @@ This should return the users list paginated and formatted according to [JSON:API
 
 ### Prefix
 
-As you notice the default prefix for the restify api is `/api/restify`. This can be changed from the `app/restify.php`
+As you notice, the default prefix for the restify api is `/api/restify`. This can be changed from the `app/restify.php`
 file:
 
 ```php
@@ -91,9 +91,9 @@ One important configuration is the restify default middlewares:
 
 ### Sanctum authentication
 
-Usually you want to authenticate your api (allow access only to authenticated users). For this purpose you can simply add another middleware. For the `sanctum`, you can add the `auth:sanctum`. Make sure you put this right after `api` middleware.
+Usually, you want to authenticate your api (allow access only to authenticated users). For this purpose, you can simply add another middleware. For the `sanctum`, you can add the `auth:sanctum`. Make sure you put this right after `api` middleware.
 
-Restify also provides the `EnsureJsonApiHeaderMiddleware` middleware, which enforce you to use the `application/application-json` `Accept header` for your API requests. If you prefer to add this middleware, make sure, even when using Postman/Insomnia API client that this `Accept header` is applied.
+Restify also provides the `EnsureJsonApiHeaderMiddleware` middleware, which enforces you to use the `application/application-json` `Accept header` for your API requests. If you prefer to add this middleware, make sure that even when using Postman/Insomnia API client that this `Accept header`, is applied.
 
 ## Generate repository
 
@@ -111,7 +111,7 @@ php artisan restify:repository PostRepository --all
 
 ## Generate policy
 
-Since the authorization is using the Laravel Policies, a good way of generating a complete policy for an entity is by
+Since the authorization implies using the Laravel Policies, a good way of generating a complete policy for an entity is by
 using the restify command:
 
 ```shell script
