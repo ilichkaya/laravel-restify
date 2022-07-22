@@ -22,7 +22,7 @@ To ensure you can get your profile, you should add the `auth:sanctum` middleware
 
 ## Get profile
 
-When retrieving the user profile, by default it is serialized using the `UserRepository`.
+When retrieving the user's profile, by default it is serialized using the `UserRepository`.
 
 ```http request
 GET: /api/restify/profile
@@ -47,7 +47,7 @@ This is what we have for a basic profile:
 }
 ```
 
-You can add more `fields` in your `UserRepository` if you want to display.
+You can add more `fields` in your `UserRepository` if you want to display them.
 
 ```php
 public function fields(RestifyRequest $request): array
@@ -73,7 +73,7 @@ public static array $related = [
 ];
 ```
 
-And make sure the `User` model, has this method, which returns a relationship from another table, or you can simply
+Make sure the `User` model has this method, which returns a relationship from another table. Another option is that you can simply
 return an array:
 
 ```php
@@ -89,7 +89,7 @@ public function roles(): array
 }
 ```
 
-Let's get the profile now, using the `roles` relationship:
+Let's get the profile now using the `roles` relationship:
 
 ```http request
 GET: /api/restify/profile?include=roles
@@ -122,7 +122,7 @@ The result will look like this:
 
 ### Without repository
 
-In some cases, you might choose to not use the repository for the profile serialization. In such cases you should add the
+In some cases, you might choose not to use the repository for the profile serialization. In such cases you should add the
 trait `Binaryk\LaravelRestify\Repositories\UserProfile` into your `UserRepository`:
 
 ```php
@@ -140,12 +140,12 @@ class UserRepository extends Repository
 }
 ```
 
-In this case, the profile will return the model directly:
+In this case, the profile will return to the model directly:
 
 ### Relations
 <alert type="warning"> 
 
-Note that when you're not using the repository, the `?include` will do not work anymore.
+Note that when you're not using the repository, the `?include` will not work anymore.
 
 </alert>
 
@@ -170,7 +170,7 @@ And you will get:
 
 ### Conditionally use repository
 
-In rare cases you may want to utilize the repository only for non admin users for example, to ensure you serialize
+In rare cases you may want to utilize the repository only for non-admin users. For example, to ensure you serialize
 specific fields for the users:
 
 ```php
@@ -204,12 +204,12 @@ class UserRepository extends Repository
 }
 ```
 
-This way you instruct Restify to only use the repository for users who are admins of you application.
+By doing so, you instruct Restify to only use the repository for users who are admins of your application.
 
 ## Update Profile using repository
 
-By default, Restify will validate, and fill only fields presented in your `UserRepository` for updating the user
-profile. Let's get as an example the following repository fields:
+By default, Restify will validate and fill only fields presented in your `UserRepository` for updating the user's
+profile. Let's have as an example the following repository fields:
 
 ```php
 // UserRepository
@@ -325,7 +325,7 @@ public function up()
 }
 ```
 
-Not you should specify in the user repository that user has avatar file:
+You should specify in the user repository that the user has an avatar file:
 
 ```php
 use Binaryk\LaravelRestify\Fields\Image;
@@ -346,7 +346,7 @@ Now you can use the Restify profile update, and give the avatar as an image.
 
 <alert type="warning">
 
-You cannot upload file using PUT or PATCH verbs, so we should use POST request.
+You cannot upload a file using PUT or PATCH verbs, so we should use POST request.
 
 </alert>
 
@@ -354,7 +354,7 @@ You cannot upload file using PUT or PATCH verbs, so we should use POST request.
 POST: /api/restify/profile
 ```
 
-The payload should be a form-data, with an image under `avatar` key:
+The payload should be a form-data, with an image under the `avatar` key:
 
 ```json
 {
@@ -362,4 +362,4 @@ The payload should be a form-data, with an image under `avatar` key:
 }
 ```
 
-If you have to customize path or disk of the storage file, check the [image field](../repository-pattern/field.html#file-fields)
+If you have to customize the path or disk of the storage file, check the [image field](../repository-pattern/field.html#file-fields)
