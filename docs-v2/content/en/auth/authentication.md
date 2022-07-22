@@ -7,11 +7,11 @@ position: 1
 
 Laravel Restify has support for authentication with [Laravel Sanctum](https://laravel.com/docs/sanctum#api-token-authentication).
 
-You'll finally enjoy the auth setup (`register`, `login`, `forgot` and `reset password`).
+You'll finally enjoy the auth setup (`register`, `login`, `forgot`, and `reset password`).
 
 ## Prerequisites
 
-Migrate the `users`, `password_resets` table (they already exists into a fresh Laravel app).
+Migrate the `users`, `password_resets` table (they already exist into a fresh Laravel app).
 
 ### Install sanctum
 
@@ -42,7 +42,7 @@ The `User` model should extend the `Illuminate\Foundation\Auth\User` class or im
 
 <alert type="info">
 
-Ensure you didn't skip to add the `\Laravel\Sanctum\HasApiTokens` trait to your `User` model.
+Ensure you didn't skip to adding the `\Laravel\Sanctum\HasApiTokens` trait to your `User` model.
 
 </alert>
 
@@ -68,7 +68,7 @@ Route::restifyAuth();
 
 And voila, now you have auth routes ready to be used.
 
-These are default routes provided by restify: 
+These are the default routes provided by restify: 
 
 | Verb           | URI                                      | Action           | 
 | :------------- |:-----------------------------------------| :----------------|
@@ -86,12 +86,12 @@ The `register` and `login` routes are outside the base `restify` prefix because 
 
 ## Export auth controllers
 
-All of these routes are handle by default, so you can just use them. However, you can customize each of them by exporting auth controllers: 
+All of these routes are handled by default, so you can just use them. However, you can customize each of them by exporting auth controllers: 
 
 ```shell
 php artisan restify:auth
 ```
-So you have all auth controllers, blade email files exported into your project.
+So you have all auth controllers and blade email files exported into your project.
 
 ## Sanctum Middleware
 
