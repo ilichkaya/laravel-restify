@@ -272,10 +272,10 @@ This is a standard index `api/restify/posts` response:
 
 ### Index main meta
 
-Firstly we have the `meta` object, by default this includes pagination information, so your frontend could be adapted
+First, we have the `meta` object. By default this includes pagination information, so your frontend could be adapted
 accordingly.
 
-If you want to modify it, you can do so easily in the repository:
+If you want to modify it, you can easily do so in the repository:
 
 ```php
 public function resolveIndexMainMeta(RestifyRequest $request, Collection $items, array $paginationMeta): ?array
