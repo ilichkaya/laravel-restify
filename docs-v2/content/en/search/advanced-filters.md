@@ -8,14 +8,14 @@ position: 12
 Restify has [base filters](/search/basic-filters) for usual `search` or `matching`. 
 
 <alert type="success"> 
-Advanced filters will help you to build your own filters from scratch.
+Advanced filters will come in handy when it comes to helping you build your own filters from scratch.
 </alert>
 
 ## Definition
 
-To declare an advanced filter you should create a class that extends the `Binaryk\LaravelRestify\Filters\AdvancedFilter`.
+To declare an advanced filter, you should create a class that extends the `Binaryk\LaravelRestify\Filters\AdvancedFilter`.
 
-Say we have a filter that filters all ready to publish posts:
+Let's say we have a filter that filters all the posts that are ready to be published:
 
 ```php
 use Binaryk\LaravelRestify\Filters\AdvancedFilter;
@@ -40,7 +40,7 @@ class ReadyPostsFilter extends AdvancedFilter
 
 ### Register filter
 
-Then add the filter to the repository `filters` method: 
+Then, add the filter to the repository `filters` method: 
 
 ```php
 // PostRepository.php
@@ -70,7 +70,7 @@ public function filters(RestifyRequest $request): array
 
 ### Apply advanced filter
 
-To apply an advanced filter, the frontend has to send the `filters` query param with a base64 encoded filter:
+To apply an advanced filter, the Frontend has to send the `filters` query param with a base64 encoded filter:
 
 ```javascript
 const filters = btoa(JSON.stringify([
@@ -83,15 +83,15 @@ const filters = btoa(JSON.stringify([
 const  response = await axios.get(`api/restify/posts?filters=${filters}`);
 ```
 
-The frontend has to encode into base64 an array of filters. Each filter contains 2 things:
+The Frontend has to encode into base64 an array of filters. Each filter contains 2 things:
 
 - `key` - which is the `ke-bab` form of the filter class name, or a custom `$uriKey` [defined in the filter](#custom-uri-key)
 
 - `value` - this is optional, and represents the value the advanced filter will as a third argument in the `filter` method
 
-### Custom uri key
+### Custom keys
 
-Since your class names could change along the way, you can define a `$uriKey` property to your filters, so the frontend will use always the same `key` when applying a filter:
+Since your class names could change along the way you can define a `$uriKey` property to your filters, so the Frontend will use always the same `key` when applying a filter:
 
 ```php
 class ReadyPostsFilter extends AdvancedFilter 
@@ -104,13 +104,13 @@ class ReadyPostsFilter extends AdvancedFilter
 ```
 ### Advanced filter value
 
-The third argument of the `filter` method is the raw value send by the frontend. Sometimes it might be an array, so you have to get the value using array access: 
+The third argument of the `filter` method is the raw value sent by the Frontend. Sometimes it might be an array, so you have to get the value by using the array's access: 
 
 ```php
 $value['activation']['active']
 ```
 
-To avoid this, there is an `input` method defined into the parent class, so you can use: 
+To avoid this, there is an `input` method defined into the parent class. In that manner, you can use: 
 
 ```php
  public function filter(RestifyRequest $request, Relation|Builder $query, $value)
@@ -119,12 +119,12 @@ To avoid this, there is an `input` method defined into the parent class, so you 
 }
 ```
 
-This method gets a default value as a second parameter in case the frontend didn't define it.
+This method gets a default value as a second parameter in case the Frontend didn't define it.
 
 
 ### Advanced filter rules
 
-The `rules` method return an associative array with laravel rules for the payload the frontend should send in the `value` property for this specific filter. The payload is validated right before it gets to the filter method:
+The `rules` method returns an associative array with laravel rules for the payload that the frontend should send in the `value` property for this specific filter. The payload is validated right before it gets to the filter method:
 
 ```php
 public function rules(Request $request): array
@@ -135,7 +135,7 @@ public function rules(Request $request): array
 }
 ```
 
-So the frontend should send the `created_at` value:
+The Frontend can also send the `created_at` value:
 
 ```javascript
 {
@@ -144,7 +144,7 @@ So the frontend should send the `created_at` value:
 }
 ```
 
-And you can get this value into the `filter` method using the [advanced filter value](#advanced-filter-value):
+And you can get this value into the `filter` method by using the [advanced filter value](#advanced-filter-value):
 
 ```php
  $value = $this->input('created_at', now());
@@ -154,7 +154,7 @@ And you can get this value into the `filter` method using the [advanced filter v
 
 ## Variations
 
-Restify ships a few types of build in filter classes you can extend for specific needs.
+Restify ships a few types of build-in filter classes you can extend for your very specific needs.
 
 ### Date filters
 
@@ -368,7 +368,7 @@ The response will look like this:
   ]
 ```
 
-Along with custom filters, you can also include in the response the primary filters (as matches), by using `?include` query param: 
+Along with custom filters, you can also include in the response the primary filters (as matches), by using the `?include` query param: 
 
 ```http request
 /api/restify/posts/filters?include=matches,searchables,sortables
