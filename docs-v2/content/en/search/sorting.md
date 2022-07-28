@@ -8,7 +8,7 @@ position: 13
 
  ## Definition
 
-During index requests, usually we have to sort by specific attributes. This requires the `$sort` configuration:
+During index requests, we usually have to sort them by some specific attributes. This requires the `$sort` configuration:
 
 ```php
 class PostRepository extends Repository
@@ -16,7 +16,7 @@ class PostRepository extends Repository
     public static array $sort = ['id'];
 ```
 
-Performing request requires the sort query param:
+Performing a request requires the query param sort:
 
 ## Descending sorting
 
@@ -32,7 +32,7 @@ Sorting ASC:
 GET: /api/restify/posts?sort=id
 ```
 
-or with plus sign before the field:
+or with a plus sign before the field:
 
  ```http_request
 GET: /api/restify/posts?sort=+id
@@ -40,13 +40,12 @@ GET: /api/restify/posts?sort=+id
 
 ## Sort using relation
 
-Sometimes you may need to sort by a `belongsTo` or `hasOne` relationship. 
+Sometimes, you may need to sort using a `belongsTo` or `hasOne` relationship. 
 
-This become a breeze with Restify. Firstly you have to instruct your sort to use a relationship:
+This becomes a breeze with Restify. First you have to instruct your sort to use a relationship:
 
 ### HasOne sorting
-
-Using a `related` relationship, it becomes very easy to define a sortable by has one related.
+By using a `related` relationship, it becomes very easy to define a sortable by having a related one.
 
 You simply add the `->sortable()` method to the relationship:
 
@@ -74,7 +73,7 @@ The API request will always have to use the full path to the `attributes`:
 GET: /api/restify/posts?sort=post.attributes.title
 ```
 
-The structure of the `sort` query param value consist always from 3 parts:
+The structure of the `sort` query param value always includes these 3 parts:
 
 - `post` - the name of the relation defined in the `related` method
 - `attributes` - a generic json:api term
@@ -99,7 +98,7 @@ public function related(): array
 
 ### Using custom sortable filter
 
-You can override the `sorts` method, and return an instance of `SortableFilter` that might be instructed to use a relationship:
+You can override the `sorts` method and return an instance of `SortableFilter` that might be instructed to use a relationship:
 
 ```php
 // PostRepository
@@ -118,19 +117,19 @@ public static function sorts(): array
 }
 ```
 
-Make sure that the column is fully qualified (include the table name).
+Make sure that the column is fully qualified (including the table name).
 
-The request could look like:
+The request could look like this:
 
 ```http request
 GET: /api/restify/posts?sort=-users.name
 ```
 
-This will return all posts, sorted descending by users name.
+This will return all posts sorted descendingly by users' names.
 
 <alert type="info">
 
-As you may notice we have typed twice the `users.name` (on the array key, and as argument in the `setColumn` method). As soon as you use the fully qualified key name, you can avoid the `setColumn` call, since the column will be injected automatically based on the `sorts` key.
+As you can notice, we have typed twice the `users.name` (on the array key, and as an argument in the `setColumn` method). As soon as you use the fully qualified key name, you can avoid the `setColumn` call since the column will be injected automatically based on the `sorts` key.
 
 </alert>
 
@@ -162,6 +161,6 @@ You can use the following request to get sortable attributes for a repository:
 
 <alert type="info">
 
-To get all filters, you can use `/api/restify/posts/filters?only=sortables,matches,searchables`.
+To get all the filters, you can use `/api/restify/posts/filters?only=sortables,matches,searchables`.
  
 </alert>
