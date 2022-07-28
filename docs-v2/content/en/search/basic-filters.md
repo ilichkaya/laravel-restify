@@ -5,13 +5,13 @@ category: Search & Filters
 position: 11
 ---
 
-Restify provides few powerful ways to filter and search your data.
+Restify provides a few powerful ways to filter and search your data.
 
 ## Global search
 
-Restify provides a global endpoint that searches over all repositories searchable fields. 
+Restify provides a global endpoint that searches over all the repositories' searchable fields. 
 
-To define which repository fields are searchable, you may assign an array of database columns in the `search` property of your repository class. This includes id column by default, but you may override it to your needs:
+In order to define which repository fields are searchable, you may assign an array of database columns in the `search` property of your repository class. This includes an ID column by default, but you can override it to your needs:
 
 ```php
 class PostRepository extends Repository
@@ -36,7 +36,7 @@ There are 2 ways to disable the global search:  for a repository, either return 
 'mark the `$globallySearchable` static property false on repository',
 ]"></list>
 
-So to disable the `Posts` from the global search using the repository property we do:
+To disable the `Posts` from the global search by using the repository property, we do as following:
 
 ```php
 // PostRepository.php
@@ -45,7 +45,7 @@ public static bool $globallySearchable = false;
 
 ### Paginate global search
 
-You can limit the number of results that are returned in the global search by overriding the `globalSearchResults` property on the resource:
+You can limit the number of results that are returned in the global search by overriding the `globalSearchResults` property on this resource:
 
 ```php
 // PostRepository.php
@@ -54,7 +54,7 @@ public static int $globalSearchResults = 5;
 
 <alert type="success"> 
 
-Restify has built in support for laravel scout, so it will initialize the query using scout if you have setup it for the model.
+Restify has built in a reliable support for laravel scout, so it will initialize the query by using scout if you have already set it up for the model.
 
 </alert>
 
@@ -77,7 +77,7 @@ The default global search response looks like this:
 }
 ```
 
-Where the `title` is the repository column defined by the `$title` property. So you can customize it:
+Where the `title` is the repository column defined by the `$title` property, you can customize it like this:
 
 ```php
 // UserRepository.php
@@ -97,9 +97,9 @@ public function subtitle(): ?string
 
 ## Repository Search
 
-The repository search works in a similar way as [global search](#global-search), however in this case the endpoint refers to the repository and the search will be applied for a certain repository.
+The repository search works in a similar way as [global search](#global-search). In this case the endpoint refers to the repository, and the search will be applied for a certain repository.
 
-Say we want to search users by their `email` and `name`:
+Let's say we want to search users by their `email` and `name`:
 
 ```php
 class UserRepository extends Repository
@@ -107,7 +107,7 @@ class UserRepository extends Repository
     public static array $search = ['name', 'email'];
 ```
 
-So the endpoint will scope the the `users` repository now:
+The endpoint will scope the `users` repository now:
 
 ```http request
 GET: /api/restify/users?search="John Doe"
@@ -130,7 +130,7 @@ By default, Restify search is case-sensitive. You can change this behavior by ch
 
 ### Custom search filter
 
-The search could be customized by creating a class that extends the `\Binaryk\LaravelRestify\Filters\SearchableFilter`: 
+The search can be customized by creating a class that extends the `\Binaryk\LaravelRestify\Filters\SearchableFilter`: 
 
 ```php
 use Binaryk\LaravelRestify\Filters\SearchableFilter;
@@ -144,7 +144,7 @@ class CustomTitleSearchFilter extends SearchableFilter
 }
 ```
 
-In the `filter` method you can define your own filtering over the `$query` builder and then attach the class instance to a column:
+Through the `filter` method you can define your own filtering over the `$query` builder, and then attach the class instance to a column:
 
 ```php
 public static function searchables(): array
@@ -177,7 +177,7 @@ class PostRepository extends Repository
 }
 ```
 
-As we may notice the match configuration is an associative array, defining the attribute name and type mapping.
+As far as one can see, the match configuration is an associative array defining the attribute's name and type's mapping.
 
 Available types:
 
@@ -296,7 +296,7 @@ Request:
 GET: /api/restify/posts?published_at=2021-09-16,2021-11-16
 ```
 
-So it will return all posts published between the first and the second dates. It works with `integer` as well: 
+It will return all the published posts between the first and the second dates. It works with `integer` as well: 
 
 ```http request
 GET: /api/restify/posts?id=1,20
@@ -306,7 +306,7 @@ Match all available `ids` between `1` and `20`.
 
 ### Match array
 
-Match also accept a list of elements in the query param:
+Match also accepts a list of elements in the query param:
 
 ```php
 class PostRepository extends Repository
@@ -345,7 +345,7 @@ All match types accept a negation, so you can negate the column match by simply 
 GET: /api/restify/posts?-id=1,2,3
 ```
 
-This will return all posts where doesn't have the `id` in the `[1,2,3]` list.
+This will return all posts where a `id` in the `[1,2,3]` list does not exist.
 
 You can apply `-` (negation) for every match:
 
@@ -353,11 +353,11 @@ You can apply `-` (negation) for every match:
 GET: /api/restify/posts?-title="Some title"
 ```
 
-This will return all posts that doesn't contain `Some title` substring.
+This will return all posts that don't contain `Some title` substring.
 
 ### Custom match filter
 
-Sometimes you may have a large logic into a match. To allow this, `Restify` provides a declarative way to define `matchers`. For this purpose you should define a class, that extends the `Binaryk\LaravelRestify\Filters\MatchFilter`:
+Sometimes you may have a large logic into a match. To allow this, `Restify` provides a declarative way to define `matchers`. For this purpose you should define a class that extends the `Binaryk\LaravelRestify\Filters\MatchFilter`:
 
 ```php
 use Binaryk\LaravelRestify\Filters\MatchFilter;
@@ -385,15 +385,15 @@ public static function matches(): array
 
 <alert type="danger">
 
-As soon as you define the `matches` method into the repository, the `$match` array is not taken into consideration anymore. So make sure you return all available matches from this method.
+As soon as you define the `matches` method into the repository, the `$match` array is not taken into consideration anymore. Make sure you return all available matches from this method.
 
 </alert>
 
 ### Partial match
 
-The match filters 1:1 match, however, when you're looking for a substring into a text, you might need to partially match it.
+The match filters a 1:1 match. However, when you're looking for a substring into a text, you might need to partially match it.
 
-This could be done using the `Binaryk\LaravelRestify\Filters\MatchFilter` class:
+This can be done using the `Binaryk\LaravelRestify\Filters\MatchFilter` class:
 
 ```php
 public static function matches(): array
@@ -406,7 +406,7 @@ public static function matches(): array
 
 ### Get available matches
 
-You can use the following request to get all repository matches:
+You can use the following request to get all the repository matches:
 
 ```http request
 /api/restify/posts/filters?only=matches
