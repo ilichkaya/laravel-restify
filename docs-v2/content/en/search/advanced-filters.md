@@ -87,7 +87,7 @@ The Frontend has to encode into base64 an array of filters. Each filter contains
 
 - `key` - which is the `ke-bab` form of the filter class name, or a custom `$uriKey` [defined in the filter](#custom-uri-key)
 
-- `value` - this is optional, and represents the value the advanced filter will as a third argument in the `filter` method
+- `value` - even though this is optional, it represents the value of the advanced filter as a third argument in the `filter` method
 
 ### Custom keys
 
